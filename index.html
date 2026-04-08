@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saywalahi</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="walahi.js"></script>
+    <link rel="icon" href="163.ico" type="image/x-icon">
+</head>
+<body class="bg-gray-400 flex item-center justify-center min-h-screen font-sans select-none">
+    <div id="" class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+        <!-- game top-->
+        <div class="flex justify-between item-center mb-4">
+            <h1 class="text-1 font-bold text-gray-800">sweep</h1>
+            <div id="status" class="text-red-500 font-bold font-mono text-lg">🚩10</div>
+            <button onclick="init()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded transition-colors text-sm font-bold">
+                重設
+            </button>
+        </div>
+        <!-- gameArea-->
+        <div id="board" class="grid grid-cols-10 bg-gray-400 border border-gray-400 gap-[1px]"></div>
+        <!-- info-->
+        <div id="msg" class="mt-4 text-center font-bold h-6 text-gray-800"></div>
+        <!-- title-->
+        <div></div>
+        <!-- gameState-->
+        <div></div>
+        <script>
+            const SIZE = 10, MINES = 10;
+        let board = [], flags = 0 ,gameOver = false, firstClick = true;
+        const boardElement = document.getElementById('board');
+        const statusElement = document.getElementById('status');
+        const msgElement = document.getElementById('msg');
+                
+        const colors = ['',
+                        'text-blue-600',
+                        'text-green-600',
+                        'text-red-600',
+                        'text-purple-600',
+                        'text-red-900',
+                        'text-teal-600',
+                        'black',
+                        'text-gray-600']
+                
+        function toggleFlag(r,c,cell){
+        }
+        
+        function clickCell(r,c,cell){
+        
+        }
+        
+        function init(){
+            boardElement.innerHTML = '';
+            board =Array.from({length: SIZE}, 
+                            ()=>Array.from({length:SIZE}, 
+                            ()=> ({mine:false,rev:false,flag:false}))
+            )
+            flags = 0;
+            gameOver = false;
+            firstClick = true;
+            statusElement.innerText = "🚩 ${MINES}"; 
+            msgElement.innerText = '';
+            for(let r=0;r<SIZE;r++){
+                for(let c=0;c<SIZE;c++){
+                    const cell = document.createElement('div');
+                    cell.className = 'w-8 h-8 sm:w-10 sw:h-10 bg-gray-200 flex item-center justify-center font-bold text-lg cu'
+                    cell.oncontextmenu = (e) => {
+                        e.preventDefault();
+                        //rightClick put flag
+                        toggleFlag(r,c,cell);
+                    };
+                    cell.onclick = () => clickCell(r,c,cell); //sweep
+                    boardElement.appendChild(cell);
+                }
+            }
+        }
+        init()
+        </script>
+    </div>
+</body>
+</html>
